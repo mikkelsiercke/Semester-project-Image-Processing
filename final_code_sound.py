@@ -167,8 +167,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 continue
 
             (x, y, w, h) = cv.boundingRect(c)
-
-            x_center = x + int(w / 2)
+            
+            M = cv.moments(c)
+            x_center = int(M["m10"] / ["m00"])
+            
+            #x_center = x + int(w / 2)
             centers.append(x_center)
             centers_log.append(x_center)
             centers.sort()
